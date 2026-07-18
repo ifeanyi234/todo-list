@@ -20,4 +20,7 @@ addBtn.addEventListener("click", function (e) {
     addTask(input.value);
     console.log(task);
   }
+
+  // reset
+  input.value = "";
 });
