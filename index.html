@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS Projects | To-Do List</title>
+  </head>
+  <body class="flex poppins-regular">
+    <header>
+      <div class="brand poppins-bold">To-Do List</div>
+    </header>
+    <div class="container flex">
+      <div class="todo-wrapper flex">
+        <!-- Summary -->
+        <div class="summary flex">
+          <span id="taskCount">0 tasks remaining</span>
+        </div>
+
+        <!-- Input -->
+        <form action="#" class="flex input-area">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Add a new task..."
+            autocomplete="off"
+          />
+          <button type="submit" id="addBtn">Add</button>
+        </form>
+
+        <!-- Task List -->
+        <ul id="taskList" class="task-list flex"></ul>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state">
+          No tasks yet — add your first one above 🎉
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
