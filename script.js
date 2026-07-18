@@ -2,7 +2,6 @@
 const input = document.querySelector("#taskInput");
 const addBtn = document.querySelector("#addBtn");
 const error = document.querySelector(".error");
-const checkBox = document.querySelector("#checkbox");
 
 const task = [];
 
@@ -16,7 +15,9 @@ addBtn.addEventListener("click", function (e) {
     error.classList.add("active");
     error.textContent = "Field must not be empty";
     return;
+  } else {
+    error.classList.remove("active");
+    addTask(input.value);
+    console.log(task);
   }
-  console.log(checkBox.checked);
-  console.log(input.value);
 });
