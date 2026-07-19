@@ -4,6 +4,7 @@ const addBtn = document.querySelector("#addBtn");
 const error = document.querySelector(".error");
 const listContainer = document.querySelector("#taskList");
 const taskCount = document.querySelector("#taskCount");
+const emptyState = document.querySelector("#emptyState");
 
 const tasks = [];
 
@@ -53,8 +54,10 @@ addBtn.addEventListener("click", function (e) {
 
     // task count
     taskCount.textContent = `${tasks.length} tasks remaining`;
-
-    // console.log(tasks);
+    // remove when list not empty
+    if (tasks.length) {
+      emptyState.style.display = "none";
+    }
   }
 
   // reset
