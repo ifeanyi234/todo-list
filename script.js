@@ -7,8 +7,8 @@ const taskCount = document.querySelector("#taskCount");
 
 const tasks = [];
 
-const addTask = function (taskValue) {
-  tasks.push(taskValue);
+const addTask = function (taskValue, checked) {
+  tasks.push({ text: taskValue, isChecked: false });
 };
 
 const createEl = function () {
@@ -17,6 +17,14 @@ const createEl = function () {
   listContainer.appendChild(newEl);
   return newEl;
 };
+
+listContainer.addEventListener("click", function (e) {
+  if (e.target.classList.contains("checkbox")) {
+    const index = e.target.dataset.index;
+    tasks[index].isChecked = !tasks[index].isChecked;
+    console.log(e.target);
+  }
+});
 
 addBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -34,17 +42,19 @@ addBtn.addEventListener("click", function (e) {
     listContainer.innerHTML = "";
 
     // create element
-    tasks.forEach((task) => {
+    tasks.forEach((taskObj, index) => {
       const newTaskItem = createEl();
-      newTaskItem.innerHTML = `<input type="checkbox" />
-            <p class="task-text">${task}</p>
+      // newTaskItem.dataset.index = index;
+      newTaskItem.innerHTML = `<input type="checkbox" data-index=${index} class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
+            <p class="task-text">${taskObj.text}</p>
             <button class="delete-btn">x</button>
       `;
     });
+
     // task count
     taskCount.textContent = `${tasks.length} tasks remaining`;
 
-    console.log(tasks);
+    // console.log(tasks);
   }
 
   // reset
