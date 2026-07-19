@@ -17,8 +17,6 @@ const createEl = function () {
   listContainer.appendChild(newEl);
   return newEl;
 };
-const addClass = function (el, className) {};
-const append = function (parentEl, el) {};
 
 addBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -32,13 +30,18 @@ addBtn.addEventListener("click", function (e) {
     // add task
     addTask(input.value);
 
+    // Clear the list
     listContainer.innerHTML = "";
 
-    tasks.forEach((task, _, arr) => {
-      // create element
+    // create element
+    tasks.forEach((task) => {
       const newTaskItem = createEl();
-      newTaskItem.textContent = task;
+      newTaskItem.innerHTML = `<input type="checkbox" />
+            <p class="task-text">${task}</p>
+            <button class="delete-btn">x</button>
+      `;
     });
+    // task count
     taskCount.textContent = `${tasks.length} tasks remaining`;
 
     console.log(tasks);
