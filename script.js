@@ -3,6 +3,7 @@ const input = document.querySelector("#taskInput");
 const addBtn = document.querySelector("#addBtn");
 const error = document.querySelector(".error");
 const listContainer = document.querySelector("#taskList");
+const taskCount = document.querySelector("#taskCount");
 
 const tasks = [];
 
@@ -38,6 +39,7 @@ addBtn.addEventListener("click", function (e) {
       const newTaskItem = createEl();
       newTaskItem.textContent = task;
     });
+    taskCount.textContent = `${tasks.length} tasks remaining`;
 
     console.log(tasks);
   }
