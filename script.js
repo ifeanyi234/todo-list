@@ -7,7 +7,7 @@ const taskCount = document.querySelector("#taskCount");
 const emptyState = document.querySelector("#emptyState");
 const tasks = [];
 
-const addTask = function (taskValue, checked) {
+const addTask = function (taskValue) {
   tasks.push({ text: taskValue, isChecked: false });
 };
 
@@ -41,9 +41,7 @@ listContainer.addEventListener("click", function (e) {
   if (e.target.classList.contains("delete-btn")) {
     popTask(tasks, index);
     // remove when list not empty
-    if (!tasks.length) {
-      emptyState.style.display = "inline-block";
-    }
+    updateEmptyState();
 
     // Clear the list
     listContainer.innerHTML = "";
@@ -70,18 +68,22 @@ const renderList = function () {
       newTaskItem.classList.toggle("completed");
     }
     newTaskItem.innerHTML = `<input type="checkbox" class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
-            <p class="task-text">${taskObj.text}</p>
-            <button class="delete-btn">x</button>
-      `;
+              <p class="task-text">${taskObj.text}</p>
+              <button class="delete-btn">x</button>
+        `;
   });
 
   // task count
   updateTaskCount();
 };
 
+const updateEmptyState = function () {
+  emptyState.style.display = tasks.length ? "none" : "inline-block";
+};
+
 addBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  if (!input.value || /\s/.test(input.value)) {
+  if (!input.value.trim()) {
     error.classList.add("active");
     error.textContent = "Field must not be empty";
     reset();
@@ -99,9 +101,7 @@ addBtn.addEventListener("click", function (e) {
     renderList();
 
     // remove when list not empty
-    if (tasks.length) {
-      emptyState.style.display = "none";
-    }
+    updateEmptyState();
   }
 
   // reset
