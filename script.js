@@ -19,13 +19,26 @@ const createEl = function () {
 };
 
 listContainer.addEventListener("click", function (e) {
+  // complete task
+  const index = e.target.parentElement.dataset.index;
   if (e.target.classList.contains("checkbox")) {
-    const index = e.target.dataset.index;
     tasks[index].isChecked = !tasks[index].isChecked;
     e.target.parentElement.classList.toggle("completed");
-    console.log(newTaskItem);
+  }
+
+  // delete task
+  if (e.target.classList.contains("delete-btn")) {
+    popTask(tasks, index);
+    console.log(tasks, index);
   }
 });
+
+// Deletion
+const popTask = function (arr, index) {
+  if (index >= 0 && index < arr.length) {
+    arr.splice(index, 1);
+  }
+};
 
 addBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -45,11 +58,11 @@ addBtn.addEventListener("click", function (e) {
     // create element
     tasks.forEach((taskObj, index) => {
       const newTaskItem = createEl();
-      // newTaskItem.dataset.index = index;
+      newTaskItem.dataset.index = index;
       if (taskObj.isChecked) {
         newTaskItem.classList.toggle("completed");
       }
-      newTaskItem.innerHTML = `<input type="checkbox" data-index=${index} class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
+      newTaskItem.innerHTML = `<input type="checkbox" class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
             <p class="task-text">${taskObj.text}</p>
             <button class="delete-btn">x</button>
       `;
