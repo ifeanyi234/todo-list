@@ -16,6 +16,10 @@ const updateTaskCount = function () {
   taskCount.textContent = `${remaining} tasks remaining`;
 };
 
+const reset = function () {
+  input.value = "";
+};
+
 const createEl = function () {
   const newEl = document.createElement("li");
   newEl.classList.add("task-item");
@@ -77,9 +81,10 @@ const renderList = function () {
 
 addBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  if (!input.value) {
+  if (!input.value || /\s/.test(input.value)) {
     error.classList.add("active");
     error.textContent = "Field must not be empty";
+    reset();
     return;
   } else {
     error.classList.remove("active");
@@ -100,5 +105,5 @@ addBtn.addEventListener("click", function (e) {
   }
 
   // reset
-  input.value = "";
+  reset();
 });
