@@ -34,17 +34,7 @@ listContainer.addEventListener("click", function (e) {
     listContainer.innerHTML = "";
 
     // Render list
-    tasks.forEach((taskObj, index) => {
-      const newTaskItem = createEl();
-      newTaskItem.dataset.index = index;
-      if (taskObj.isChecked) {
-        newTaskItem.classList.toggle("completed");
-      }
-      newTaskItem.innerHTML = `<input type="checkbox" class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
-            <p class="task-text">${taskObj.text}</p>
-            <button class="delete-btn">x</button>
-      `;
-    });
+    renderList();
   }
 });
 
@@ -53,6 +43,22 @@ const popTask = function (arr, index) {
   if (index >= 0 && index < arr.length) {
     arr.splice(index, 1);
   }
+};
+
+// Render List
+const renderList = function () {
+  tasks.forEach((taskObj, index) => {
+    // create element
+    const newTaskItem = createEl();
+    newTaskItem.dataset.index = index;
+    if (taskObj.isChecked) {
+      newTaskItem.classList.toggle("completed");
+    }
+    newTaskItem.innerHTML = `<input type="checkbox" class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
+            <p class="task-text">${taskObj.text}</p>
+            <button class="delete-btn">x</button>
+      `;
+  });
 };
 
 addBtn.addEventListener("click", function (e) {
@@ -71,18 +77,7 @@ addBtn.addEventListener("click", function (e) {
     listContainer.innerHTML = "";
 
     // Render list
-    tasks.forEach((taskObj, index) => {
-      // create element
-      const newTaskItem = createEl();
-      newTaskItem.dataset.index = index;
-      if (taskObj.isChecked) {
-        newTaskItem.classList.toggle("completed");
-      }
-      newTaskItem.innerHTML = `<input type="checkbox" class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
-            <p class="task-text">${taskObj.text}</p>
-            <button class="delete-btn">x</button>
-      `;
-    });
+    renderList();
 
     // task count
     taskCount.textContent = `${tasks.length} tasks remaining`;
