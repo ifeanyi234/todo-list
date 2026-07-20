@@ -36,7 +36,11 @@ listContainer.addEventListener("click", function (e) {
   // delete task
   if (e.target.classList.contains("delete-btn")) {
     popTask(tasks, index);
-    console.log(tasks, index);
+    // remove when list not empty
+    if (!tasks.length) {
+      emptyState.style.display = "inline-block";
+    }
+
     // Clear the list
     listContainer.innerHTML = "";
 
@@ -88,9 +92,6 @@ addBtn.addEventListener("click", function (e) {
 
     // Render list
     renderList();
-
-    // task count
-    // taskCount.textContent = `${tasks.length} tasks remaining`;
 
     // remove when list not empty
     if (tasks.length) {
