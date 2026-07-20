@@ -30,6 +30,21 @@ listContainer.addEventListener("click", function (e) {
   if (e.target.classList.contains("delete-btn")) {
     popTask(tasks, index);
     console.log(tasks, index);
+    // Clear the list
+    listContainer.innerHTML = "";
+
+    // Render list
+    tasks.forEach((taskObj, index) => {
+      const newTaskItem = createEl();
+      newTaskItem.dataset.index = index;
+      if (taskObj.isChecked) {
+        newTaskItem.classList.toggle("completed");
+      }
+      newTaskItem.innerHTML = `<input type="checkbox" class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
+            <p class="task-text">${taskObj.text}</p>
+            <button class="delete-btn">x</button>
+      `;
+    });
   }
 });
 
@@ -55,8 +70,9 @@ addBtn.addEventListener("click", function (e) {
     // Clear the list
     listContainer.innerHTML = "";
 
-    // create element
+    // Render list
     tasks.forEach((taskObj, index) => {
+      // create element
       const newTaskItem = createEl();
       newTaskItem.dataset.index = index;
       if (taskObj.isChecked) {
