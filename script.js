@@ -5,7 +5,6 @@ const error = document.querySelector(".error");
 const listContainer = document.querySelector("#taskList");
 const taskCount = document.querySelector("#taskCount");
 const emptyState = document.querySelector("#emptyState");
-
 const tasks = [];
 
 const addTask = function (taskValue, checked) {
@@ -23,7 +22,8 @@ listContainer.addEventListener("click", function (e) {
   if (e.target.classList.contains("checkbox")) {
     const index = e.target.dataset.index;
     tasks[index].isChecked = !tasks[index].isChecked;
-    console.log(e.target);
+    e.target.parentElement.classList.toggle("completed");
+    console.log(newTaskItem);
   }
 });
 
@@ -46,6 +46,9 @@ addBtn.addEventListener("click", function (e) {
     tasks.forEach((taskObj, index) => {
       const newTaskItem = createEl();
       // newTaskItem.dataset.index = index;
+      if (taskObj.isChecked) {
+        newTaskItem.classList.toggle("completed");
+      }
       newTaskItem.innerHTML = `<input type="checkbox" data-index=${index} class="checkbox" ${taskObj.isChecked ? "checked" : ""} />
             <p class="task-text">${taskObj.text}</p>
             <button class="delete-btn">x</button>
