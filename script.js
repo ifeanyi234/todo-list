@@ -11,6 +11,11 @@ const addTask = function (taskValue, checked) {
   tasks.push({ text: taskValue, isChecked: false });
 };
 
+const updateTaskCount = function () {
+  const remaining = tasks.filter((task) => !task.isChecked).length;
+  taskCount.textContent = `${remaining} tasks remaining`;
+};
+
 const createEl = function () {
   const newEl = document.createElement("li");
   newEl.classList.add("task-item");
@@ -19,11 +24,13 @@ const createEl = function () {
 };
 
 listContainer.addEventListener("click", function (e) {
-  // complete task
   const index = e.target.parentElement.dataset.index;
+  // complete task
   if (e.target.classList.contains("checkbox")) {
     tasks[index].isChecked = !tasks[index].isChecked;
     e.target.parentElement.classList.toggle("completed");
+    // task count
+    updateTaskCount();
   }
 
   // delete task
@@ -59,6 +66,9 @@ const renderList = function () {
             <button class="delete-btn">x</button>
       `;
   });
+
+  // task count
+  updateTaskCount();
 };
 
 addBtn.addEventListener("click", function (e) {
@@ -80,7 +90,8 @@ addBtn.addEventListener("click", function (e) {
     renderList();
 
     // task count
-    taskCount.textContent = `${tasks.length} tasks remaining`;
+    // taskCount.textContent = `${tasks.length} tasks remaining`;
+
     // remove when list not empty
     if (tasks.length) {
       emptyState.style.display = "none";
